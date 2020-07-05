@@ -1,0 +1,21 @@
+int n=5 => 101 , no. of set bits are-> 2;
+
+Approach:
+
+step 1:   n=n&(n-1)=> n= 5&4 = 101 & 100 = 100 = 4;
+          count=1;
+step 2:   n=n&(n-1)=> n= 4&(4-1) = 4&3= 100 & 011 = 000 = 0;
+          count=2;
+step 3:   return count;
+******    do the above operation untill n =0;
+
+solution in c++:
+
+int CountSetBit(int n){
+      int count=0;
+      while(n>0){
+           n= n&(n-1);
+           count++;
+      }
+      return count;
+}
