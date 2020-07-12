@@ -1,0 +1,54 @@
+Reverse bits of a given 32 bits unsigned integer.
+
+ 
+
+Example 1:
+
+Input: 00000010100101000001111010011100
+Output: 00111001011110000010100101000000
+Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000.
+Example 2:
+
+Input: 11111111111111111111111111111101
+Output: 10111111111111111111111111111111
+Explanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10111111111111111111111111111111.
+
+Approach:
+
+Run a loop upto 32 and check the bit is set then make the (31-i) position bit is set else the bit is 0;
+
+code in c++:
+
+uint32_t reverse(uint32_t n){
+   uint32_t rev=0;
+   for(uint32_t i=0;i<31;i++){
+      if(n&(1<<i)){               //if the bit is set at i position then make (31-i)th bit is set;
+         rev+=1<<(31-i);
+      }
+      else{                        // if the ith bit is not set then make it 0;
+         rev+=0;
+      }
+   }
+   return rev;
+}
+
+Approach(without using loop):
+
+1). First, we break the original 32-bit into 2 blocks of 16 bits, and switch them.
+
+2). We then break the 16-bits block into 2 blocks of 8 bits. Similarly, we switch the position of the 8-bits blocks
+
+3). We then continue to break the blocks into smaller blocks, until we reach the level with the block of 1 bit.
+
+4). At each of the above steps, we merge the intermediate results into a single integer which serves as the input for the next step.
+
+code in c++:
+
+uint32_t reverse(uint32_t n){
+    n= (n>>16) | (n<<16);
+    n= (n>>8) | (n<<8);
+    n= (n>>4) | (n<<4);
+    n = (n>>2) | (n<<2);
+    n = (n>>1) | (n<<1);
+    return n;
+}
