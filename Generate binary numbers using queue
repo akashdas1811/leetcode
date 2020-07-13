@@ -34,13 +34,20 @@ int main(){
         int n;
         cin>>n;
         queue<string>q;
-        q.push("1");
+        q.push("1");  // Enqueue the first binary number
+        
+        // This loops is like BFS of a tree with 1 as root 
+        // 0 as left child and 1 as right child and so on
+        
         for(int i=1;i<=n;i++){
+        
+            // print the front of queue
+            
             string s= q.front();
             cout<<s<<" ";
             q.pop();
-            q.push(s+'0');
-            q.push(s+'1');
+            q.push(s+'0'); // Append "0" to s and enqueue it 
+            q.push(s+'1');  // Append "1" to s and enqueue it. Note that s contains the previous front 
         }
         cout<<endl;
     }
