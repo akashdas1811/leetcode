@@ -40,6 +40,29 @@ How to calculate the two angles with respect to 12:00?
 The minute hand moves 360 degree in 60 minute(or 6 degree in one minute) and hour hand moves 360 degree in 12 hours(or 0.5 degree in 1 minute).
 In h hours and m minutes, the minute hand would move (h*60 + m)*6 and hour hand would move (h*60 + m)*0.5.
 
+/**
+         * What do i know :
+         *
+         * Total Degrees = 360. For 12 hours
+         * In 1 hour = 360/12 = 30 degrees.
+         * In 1 hour(60 minutes) = 30 degree, So 1 minute = 30/60 ==> 1/2;
+         *
+         * Now how much hour has moved in corresponding to minute.
+         * HourDegree = hour * 30 + (minutes/60) * 30;
+         *
+         * Or we can also write as
+         * HourDegree = hour * 30 + minute/2
+         *
+         * For Minutes it's simple :
+         * In 1 minute = 360/60 ==> 6 degree.
+         *
+         * So for given minutes
+         * MinutesDegree = minutes * 6;
+         *
+         * Edge case if someone has given time 12:30....we have to consider time from 0 to 11... else 12 * 30 will overshoot
+         */
+         
+
 Code in c++:
 
 class Solution {
