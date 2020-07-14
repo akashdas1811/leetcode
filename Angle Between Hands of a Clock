@@ -1,0 +1,52 @@
+Given two numbers, hour and minutes. Return the smaller angle (in degrees) formed between the hour and the minute hand.
+
+ 
+
+Example 1:
+
+
+
+Input: hour = 12, minutes = 30
+Output: 165
+Example 2:
+
+
+
+Input: hour = 3, minutes = 30
+Output: 75
+Example 3:
+
+
+
+Input: hour = 3, minutes = 15
+Output: 7.5
+Example 4:
+
+Input: hour = 4, minutes = 50
+Output: 155
+Example 5:
+
+Input: hour = 12, minutes = 0
+Output: 0
+
+Code in c++:
+
+class Solution {
+public:
+    double angleClock(int h, int m) {
+        if(h<0 or h>12 or m<0 or m>60){
+            return -1;
+        }
+        if(h==12){
+            h=0;
+        }
+        if(m==60){
+            m=0;
+        }
+        double h1 = 0.5*(h*60 + m);
+        double m1 = 6*m;
+        double ang = abs(h1-m1);
+        ang=min(360-ang,ang);
+        return ang;
+    }
+};
