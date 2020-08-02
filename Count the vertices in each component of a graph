@@ -1,0 +1,57 @@
+5 3 // 5=>no. of vertices and 3=>no, of edges
+0 1
+2 3
+0 4
+
+here no. of components => two;
+1) 0->1->4
+2) 2->3
+
+in 1st component the no. of vertices are 3 and in 2nd no. of vertices are 2;
+
+code in c++:
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+ll visit[100001]={0};
+vector<ll>adj[100001];  // take a vector array for adjancy list
+ll vertices; // to count the no. of vertices in each component
+
+void dfs(ll s){  // s is the source node
+    visit[s]=1; // marks source node as visited
+    for(int child : adj[s]){
+        if(!visit[child]){   //check for unvisited nodes
+            visit[child]=1;
+            dfs(child);
+        }
+    }
+    vertices++; // count the vertices in every traversal in each component
+}
+
+int main(){
+    ll n,p;
+    cin>>n>>p;
+    for(ll i=0;i<p;i++){
+        ll x,y;
+        cin>>x>>y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
+    }
+    ll elements[n+1]; // to store the vertices in each component
+    ll cc=0; // count the components
+    for(ll i=0;i<n;i++){
+        if(!visit[i]){
+            dfs(i);
+            elements[cc]=vertices; // store the vertices in each component after every traversal of every vertex
+            vertices=0; // counting from 0 after completing ecery component
+            cc++;
+        }
+    }
+    for(ll i=0;i<cc;i++){
+        cout<<elements[i]<<" ";
+    }
+    
+}
+Output: 3 2
