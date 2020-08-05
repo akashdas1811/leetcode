@@ -1,0 +1,62 @@
+Design a data structure that supports the following two operations:
+
+void addWord(word)
+bool search(word)
+search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.
+
+Example:
+
+addWord("bad")
+addWord("dad")
+addWord("mad")
+search("pad") -> false
+search("bad") -> true
+search(".ad") -> true
+search("b..") -> true
+Note:
+You may assume that all words are consist of lowercase letters a-z.
+
+Code in C++:
+
+class WordDictionary {
+public:
+    /** Initialize your data structure here. */
+    unordered_map<int,vector<string>>mp;
+    bool check(string a, string b){
+        for(int i=0;i<b.length();i++){
+            if(b[i]=='.'){
+                continue;
+            }
+            else if(b[i]!=a[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+    WordDictionary() {
+        
+    }
+    
+    /** Adds a word into the data structure. */
+    void addWord(string word) {
+        mp[word.length()].push_back(word);
+    }
+    
+    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+    bool search(string word) {
+        int n=word.size();
+        for(string s:mp[n]){
+            if(check(s,word)){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
