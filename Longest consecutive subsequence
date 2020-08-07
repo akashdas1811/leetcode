@@ -1,0 +1,59 @@
+Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+
+Your algorithm should run in O(n) complexity.
+
+Example:
+
+Input: [100, 4, 200, 1, 3, 2]
+Output: 4
+Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+
+Approach 1:
+Time complexity: O(nlogn)
+Space Complexity: O(1)
+
+int longestseq(vector<int>&v){
+   if(v.size()==0)
+   {
+      return 0;
+   }
+   int c=1,m=1;
+   sort(v.begin(),v.end());
+   for(int i=1;i<nums.size();i++)
+   {
+      if(v[i]==v[i-1]+1){
+          c++;
+      }
+      else{
+         c=1;
+      }
+      m=max(m,c);
+   }
+   return m;
+}
+
+Approach 2:
+Time Complexity: O(n)
+Space complexity: O(n)
+
+int longestseq(vector<int>&v){
+    if(v.size()==0)
+    {
+       return 0;
+    }
+    int m=0;
+    unordered_set<int>s;
+    for(auto it:v){
+      s.insert(it);
+    }
+    for(int i=0;i<v.size();i++){
+        if(s.find(v[i]-1)==s.end()){  // if previous element is not present in the set then the element is 1st element of the consecutive sequence
+             int curr=1;             
+             while(s.find(v[i]+curr)!=s.end()){ // if next element is present in set then increment the vector by curr value
+                cur++;
+             }
+             m=max(m,curr);
+        }
+    }
+    return m;
+}
