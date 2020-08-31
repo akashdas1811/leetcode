@@ -1,0 +1,66 @@
+Complete the function to print spiral order traversal of a tree. For below tree, function should print 1, 2, 3, 4, 5, 6, 7.
+
+                                                     1
+                                               2           3
+                                           4       5  6         7
+                                           
+OutPut: 1 2 3 7 6 5 4
+
+Approach: Take deque and a count varible. push the root in to deque. increment the count variable. if the level is even then push the node to the front of the deque and if 
+the level is odd then push node to the back of deque. and print the curr data.
+
+Time Complexity O(n)
+Space Complexity O(n)
+
+Code in c++:
+
+void printSpiral(Node *root)
+{
+    //Your code here
+    
+    if(root==NULL)
+    {
+        return;
+    }
+    deque<Node*>dq;
+    dq.push_back(root);
+    int count=0;
+    while(!dq.empty())
+    {
+    
+        count++;
+        int size=dq.size();
+        
+        if(count%2==0)
+        {
+            for(int i=0;i<size;i++) {
+                Node* curr=dq.back();
+                dq.pop_back();
+                cout<<curr->data<<" ";
+            
+                if(curr->left!=NULL)
+                    dq.push_front(curr->left);
+                if(curr->right!=NULL)
+                    dq.push_front(curr->right);
+            }
+        }
+        
+        else if(count%2!=0)
+        {
+            for(int i=size-1;i>=0;i--)
+            {
+                Node* curr=dq.front();
+                dq.pop_front();
+                
+                cout<<curr->data<<" ";
+                
+                if(curr->right!=NULL)
+                    dq.push_back(curr->right);
+                if(curr->left!=NULL)
+                    dq.push_back(curr->left);
+            }
+        }
+    }
+    
+
+}
