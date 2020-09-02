@@ -68,3 +68,35 @@ public:
         return false;
     }
 };
+
+Optimized Solution: binary search on imaginary index from 0 to (row*col)-1
+Time Complexity: O(log(n*m))
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+           int row=matrix.size();
+           
+        if(row==0){
+            return false;
+        }
+        int col=matrix[0].size();
+        if(col==0){
+            return false;
+        }
+        int low=0,hi=(row*col)-1,mid,j;
+        while(low<=hi){
+            mid=(low+hi)/2;
+            if(matrix[mid/col][mid%col]==target){
+                return true;
+            }
+            else if(matrix[mid/col][mid%col]>target){
+                hi=mid-1;
+            }
+            else {
+                low=mid+1;
+            }
+        }
+        return false;
+    }
+};
