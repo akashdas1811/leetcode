@@ -1,8 +1,18 @@
 arr = {1,2,3,4,5};
- 
+n=5; 
 output : 2
 (1+3)=4 and (4+5)=9 are the perfect squares.
  
+Efficient Approach:
+
+1)Store all the elements of the array in a HashSet named nums and save the sum of the maximum two elements in a variable named max.
+2)It is clear that the sum of any two elements from the array will not exceed max. So, find all the perfect squares which are ≤ max and save it in an ArrayList 
+named perfectSquares.
+3)Now for every element in the array say arr[i] and for every perfect square saved in perfectSquares, check whether perfectSquares.get(i) – arr[i] exists in nums 
+or not i.e. if there is any element in the original array that when added with the currently chosen element gives any perfect square from the list.
+4)If the above condition is satisfied, increment the count variable.
+5)Print the value of count in the end.
+
 code in c++:
  
 #include<bits/stdc++.h>
